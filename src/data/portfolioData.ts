@@ -3,7 +3,7 @@
 // Information Technology Graduate (2026) | CGPA: 8.6 / 10.00
 // Location: Hyderabad, Telangana, India
 // ==========================================================================
-import prabhuPhoto from '../assets/prabhu_photo.jpg';
+
 export interface Project {
   id: string;
   title: string;
@@ -75,7 +75,7 @@ export const portfolioData = {
       { label: "Certifications", value: "4+", change: "Salesforce, Oracle, Google" },
     ],
     resumePdfUrl: "/Prabhu_Kiran_Reddy_Lakkireddy_Resume.pdf",
-    avatarUrl: prabhuPhoto,
+    avatarUrl: `${import.meta.env.BASE_URL}prabhu_photo.jpg`,
   },
 
   socials: {
