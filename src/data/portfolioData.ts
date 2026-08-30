@@ -75,7 +75,7 @@ export const portfolioData = {
       { label: "Certifications", value: "4+", change: "Salesforce, Oracle, Google" },
     ],
     resumePdfUrl: "/Prabhu_Kiran_Reddy_Lakkireddy_Resume.pdf",
-    avatarUrl: `${import.meta.env.BASE_URL}prabhu_photo.jpg`,
+    avatarUrl: "/Prabhu-Portfolio/prabhu_photo.jpg",
   },
 
   socials: {
