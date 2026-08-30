@@ -29,6 +29,20 @@ export function App() {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  // Always start portfolio at the top
+  useEffect(() => {
+    // Prevent browser from restoring the previous scroll position
+    window.history.scrollRestoration = 'manual';
+
+    // Scroll to the top when the portfolio loads
+    window.scrollTo(0, 0);
+
+    // Restore normal browser behavior when leaving the app
+    return () => {
+      window.history.scrollRestoration = 'auto';
+    };
+  }, []);
+
   // Cursor Tracker
   useEffect(() => {
     if (!customCursor) return;
@@ -37,23 +51,38 @@ export function App() {
       setCursorPos({ x: e.clientX, y: e.clientY });
 
       const target = e.target as HTMLElement | null;
-      const isInteractive = target?.closest('button, a, input, textarea, select, .glass-card, [role="button"]');
+      const isInteractive = target?.closest(
+        'button, a, input, textarea, select, .glass-card, [role="button"]'
+      );
+
       setCursorHovering(!!isInteractive);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, [customCursor]);
 
   const handleOpenTerminal = () => {
     const el = document.getElementById('terminal');
+
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({
+        behavior: 'smooth',
+      });
     }
   };
 
   return (
-    <div className="portfolio-root" style={{ position: 'relative', minHeight: '100vh' }}>
+    <div
+      className="portfolio-root"
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+      }}
+    >
       {/* Dynamic Star Constellation Particle Canvas */}
       <ParticleBackground />
 
@@ -61,12 +90,15 @@ export function App() {
       {customCursor && (
         <>
           <div
-            className={`custom-cursor ${cursorHovering ? 'hovering' : ''}`}
+            className={`custom-cursor ${
+              cursorHovering ? 'hovering' : ''
+            }`}
             style={{
               left: `${cursorPos.x}px`,
               top: `${cursorPos.y}px`,
             }}
           />
+
           <div
             className="custom-cursor-dot"
             style={{
@@ -88,19 +120,27 @@ export function App() {
 
       {/* Main Sections */}
       <main>
+        {/* Overview / Hero Section */}
         <HeroSection
           onOpenResumeModal={() => setResumeModalOpen(true)}
           onOpenTerminal={handleOpenTerminal}
         />
 
+        {/* Terminal Section */}
         <TerminalSection setTheme={setTheme} />
 
-        <ProjectsSection onSelectProject={(p) => setSelectedProject(p)} />
+        {/* Projects Section */}
+        <ProjectsSection
+          onSelectProject={(p) => setSelectedProject(p)}
+        />
 
+        {/* Skills Section */}
         <SkillsSection />
 
+        {/* Experience Section */}
         <ExperienceSection />
 
+        {/* Contact Section */}
         <ContactSection />
       </main>
 
