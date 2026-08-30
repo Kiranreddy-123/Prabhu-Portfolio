@@ -3,7 +3,7 @@
 // Information Technology Graduate (2026) | CGPA: 8.6 / 10.00
 // Location: Hyderabad, Telangana, India
 // ==========================================================================
-import prabhuPhoto from '../assets/profile.jpg';
+import prabhuPhoto from '../assets/prabhu_photo.jpg';
 export interface Project {
   id: string;
   title: string;
